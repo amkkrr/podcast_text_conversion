@@ -1,0 +1,45 @@
+@startuml
+class TranslationPipeline {
+  - raw_text: str
+  - clean_text: str
+  - sentences: list
+  - translations: list
+  __init__(text: str)
+  preprocess()
+  split_sentences()
+  translate_single(sentence: str)
+  batch_translate()
+  format_json_output()
+  execute_pipeline()
+  --
+  ' 初始化TranslationPipeline实例。
+  ' Args:
+  '     text (str): 待处理的原始文本。文本会被清洗、分句和翻译。
+  __init__(text: str)
+  --
+  ' 执行文本预处理操作，清洗原始文本。
+  ' 该方法执行以下步骤以清洗文本，为后续的分句处理做好准备：
+  ' - 替换多个连续空格为一个空格。
+  ' - 移除文本首尾的空白字符。
+  ' - 在句号、感叹号、问号后添加换行符，作为句子分割的预标识。
+  preprocess()
+  --
+  ' 将预处理后的文本分割成独立的句子列表。
+  ' 使用预处理阶段添加的换行符作为分隔符，将文本分割成初步的句子片段，并过滤掉空白片段以获得最终的句子列表。
+  split_sentences()
+  --
+  ' 模拟单句翻译功能。本方法为模拟翻译，实际应用中需要替换为调用翻译API的实现。
+  ' Args: sentence (str): 待翻译的单个句子。
+  ' Returns: str: 模拟翻译后的句子，固定返回 "[模拟翻译结果]" 字符串。
+  translate_single(sentence: str)
+  --
+  ' 批量翻译句子列表。遍历 self.sentences 中的句子，调用 translate_single 方法进行翻译，并将包含 序号、原文和译文 的元组存储到 self.translations 列表中。
+  batch_translate()
+  --
+  ' 将翻译结果格式化为JSON字符串。将 self.translations 列表中的翻译结果，按照指定的JSON格式组织成字符串，以便于展示或后续的数据处理。
+  format_json_output()
+  --
+  ' 执行完整的翻译流水线。依次调用 preprocess, split_sentences, batch_translate 和 format_json_output 方法，将输入的原始文本处理为最终的JSON格式翻译结果。
+  execute_pipeline()
+}
+@enduml
